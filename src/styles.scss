@@ -1,1 +1,43 @@
-/* You can add global styles to this file, and also import other style files */
+/*  Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Armata&family=Barlow+Semi+Condensed:ital,wght@0,400;0,600;0,700;1,400&display=swap");
+
+/* Variabler */
+$bread: "Barlow Semi Condensed", Arial, Helvetica, sans-serif;
+$fancyfont: Armata, Arial, Helvetica, sans-serif;
+
+$primary: #245953;
+$secondary: #329f93;
+$orange: #fb8d50;
+$beige: #f7f6ec;
+
+/* Mixins */
+@mixin transition {
+  transition: 0.8s ease;
+  -webkit-transition: 0.8s ease;
+  -moz-transition: 0.8s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  max-width: 2400px;
+  margin: auto;
+  overflow-x: hidden;
+  background-color: $beige;
+}
+
+nav li {
+  list-style: none;
+
+  a {
+    text-decoration: none;
+  }
+}
