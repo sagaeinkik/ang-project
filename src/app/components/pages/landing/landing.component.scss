@@ -1,0 +1,125 @@
+@use "../../../../styles.scss" as a;
+
+/* Hero-stycke */
+div.hero {
+  position: relative;
+  img {
+    width: 100%;
+    max-height: 800px;
+    object-fit: cover;
+    display: block;
+  }
+  p.imgtext {
+    position: absolute;
+    left: 50%;
+    bottom: 30%;
+    transform: translateX(-50%);
+    color: white;
+    text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
+    font-family: a.$fancyfont;
+    font-size: 1.5em;
+  }
+}
+
+/* Smala delar av sidan */
+div.content-wrapper {
+  width: 70%;
+  margin: auto;
+  p {
+    margin: 1em auto 0;
+  }
+}
+
+/* Intro till uni */
+.uni-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5em;
+
+  span {
+    font-family: a.$fancyfont;
+    color: a.$secondary;
+    font-size: 1.5em;
+  }
+}
+
+article {
+  background-color: white;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  margin: 2em 0;
+  padding: 1.4em;
+
+  h2 {
+    font-size: 1.2em;
+    max-width: 33.5em;
+    margin: auto;
+  }
+  span.date {
+    color: rgb(137, 137, 137);
+    display: block;
+    margin: 0.3em 0;
+  }
+}
+
+/* Fullbreddsbilder */
+.img-links {
+  position: relative;
+  margin-top: 2em;
+
+  img {
+    width: 100%;
+    max-height: 600px;
+    object-fit: cover;
+    filter: brightness(60%);
+    @include a.transition;
+  }
+  /* Textruta */
+  .linkbox {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+    left: 50%;
+    bottom: 40%;
+    transform: translate(-50%, -40%);
+    padding: 1.3em;
+
+    /* Länk */
+    p {
+      margin-bottom: 1.5em;
+    }
+  }
+  /* Hovereffekter */
+  &:hover {
+    img {
+      filter: brightness(100%);
+    }
+  }
+}
+
+/* Grid */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 3em;
+
+  .card {
+    background-color: a.$primary;
+    border-radius: 0 0 15px 15px;
+    margin-top: 2em;
+    color: white;
+
+    img {
+      max-height: 450px;
+      object-fit: cover;
+    }
+    div.text {
+      padding: 1em 1em 1.4em 1em;
+
+      p {
+        margin-top: 0.3em;
+        max-width: none;
+      }
+    }
+  }
+}
+
+/* MEDIA QUERIES */

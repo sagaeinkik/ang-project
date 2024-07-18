@@ -12,11 +12,30 @@ $beige: #f7f6ec;
 
 /* Mixins */
 @mixin transition {
-  transition: 0.8s ease;
-  -webkit-transition: 0.8s ease;
-  -moz-transition: 0.8s ease;
+  transition: 0.6s ease;
+  -webkit-transition: 0.6s ease;
+  -moz-transition: 0.6s ease;
 }
 
+/* Mixin för att centrera saker  */
+@mixin center($horizontal, $vertical) {
+  @if $horizontal and $vertical {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  } @else if $vertical {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  } @else if $horizontal {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/*  Allmänna regler */
 * {
   margin: 0;
   padding: 0;
@@ -32,6 +51,7 @@ body {
   margin: auto;
   overflow-x: hidden;
   background-color: $beige;
+  font-family: $bread;
 }
 
 nav li {
@@ -39,5 +59,45 @@ nav li {
 
   a {
     text-decoration: none;
+  }
+}
+
+h1,
+h2,
+h3,
+a {
+  font-family: $fancyfont;
+}
+
+p {
+  max-width: 40em;
+  line-height: 1.5;
+}
+
+img {
+  width: 100%;
+}
+
+/* Länkar som ska stylas som knappar */
+.btn-1 {
+  background-color: $primary;
+  color: white;
+  text-decoration: none;
+  padding: 0.8em 1.3em;
+  @include transition;
+
+  span {
+    margin-left: 0.4em;
+    position: relative;
+    @include transition;
+  }
+
+  &:hover {
+    background-color: $secondary;
+
+    span {
+      font-size: 1.3em;
+      top: 0.07em;
+    }
   }
 }
