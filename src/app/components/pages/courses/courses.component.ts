@@ -4,6 +4,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Course } from '../../../../models/course';
 import { CourseService } from '../../../services/course.service';
 import { FormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-courses',

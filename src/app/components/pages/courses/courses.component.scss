@@ -13,6 +13,44 @@ div.breadcrumb-container {
     }
   }
 }
+
+/* Filtrering */
+.filter-wrapper {
+  width: 100%;
+  background-color: a.$primary;
+  color: white;
+
+  .filter-controls {
+    width: 60%;
+    margin: 0 auto 2em;
+    padding: 3em 1em;
+  }
+  label {
+    display: block;
+    font-family: a.$fancyfont;
+    font-size: 1em;
+    margin: 0.3em 0;
+  }
+  label:nth-child(3) {
+    margin-top: 3em;
+  }
+  input,
+  select {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    border-bottom: 2px solid white;
+    padding: 0.3em 0;
+    font-size: 1em;
+    font-family: a.$bread;
+    color: white;
+  }
+  input::placeholder {
+    color: a.$secondary;
+    font-style: italic;
+  }
+}
+
 /* Tabell */
 .table-wrapper {
   /* Sätt bredd och scrollbarhet */
@@ -28,6 +66,12 @@ div.breadcrumb-container {
     th {
       text-align: left;
       padding-bottom: 0.5em;
+      padding-right: 0.6em;
+      font-family: a.$fancyfont;
+    }
+    //Specifikt lägg till-rubriken
+    #cadd {
+      text-align: center;
     }
     /* Sätt max-bredder */
     td {
@@ -47,6 +91,22 @@ div.breadcrumb-container {
     }
     td.add {
       text-align: center;
+      color: a.$orange;
+      font-weight: bold;
+      font-size: 1.7em;
+      cursor: pointer;
+      @include a.transition;
+
+      &:hover {
+        font-size: 2.2em;
+      }
     }
+  }
+}
+
+/* Media queries */
+@media (max-width: 650px) {
+  .filter-wrapper .filter-controls {
+    width: 90%;
   }
 }
