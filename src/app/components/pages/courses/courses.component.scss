@@ -1,0 +1,52 @@
+@use "../../../../styles.scss" as a;
+
+/* Breadcrumbs */
+div.breadcrumb-container {
+  margin: 1em 0 1em 4em;
+  a {
+    font-size: 0.8em;
+    text-decoration: none;
+    color: a.$secondary;
+
+    &.current {
+      color: a.$primary;
+    }
+  }
+}
+/* Tabell */
+.table-wrapper {
+  /* Sätt bredd och scrollbarhet */
+  width: 95%;
+  margin: auto;
+  overflow-x: scroll;
+
+  table {
+    /* Möjliggör border */
+    border-collapse: collapse;
+    width: 100%;
+    /* Positionera rubriker */
+    th {
+      text-align: left;
+      padding-bottom: 0.5em;
+    }
+    /* Sätt max-bredder */
+    td {
+      max-width: 300px;
+      min-width: 50px;
+      border-bottom: 1px solid a.$secondary;
+      padding: 0.5em 0;
+      /* Styla kursplanlänkar */
+      a {
+        font-size: 0.9em;
+        color: a.$secondary;
+
+        &:hover {
+          color: a.$primary;
+        }
+      }
+    }
+    td.add {
+      text-align: center;
+    }
+  }
+}

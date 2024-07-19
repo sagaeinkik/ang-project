@@ -1,3 +1,45 @@
 <main>
-    <p>courses works!</p>
+    <div class="breadcrumb-container">
+        <a routerLink="/">Startsida</a> / <a routerLink="/courses" routerLinkActive="current">Kurser</a>
+    </div> <!-- Slut på breadcrumb-container -->
+    <!-- Filtrering -->
+    <div class="filter">
+        <label for="search">Fritextsökning:</label>
+        <input type="search" name="search" id="search" [(ngModel)]="searchInput" (ngModelChange)="searchCourse()">
+        <label for="subjects">Filtrera enligt ämne</label>
+        <select name="subjects" id="subjects" [(ngModel)]="specificSubject" (ngModelChange)="filterBySubject()">
+            <option value="" disabled selected>Välj ämne</option>
+            <option value="alla">Alla ämnen</option>
+            <option *ngFor="let subject of allSubjects" [ngValue]="subject">{{ subject }}</option>
+        </select>
+    </div> <!-- Slut på div.filter -->
+    <!-- Tabell -->
+    <div class="table-wrapper">
+        <!-- Kontroll -->
+        @if (allCourses.length === 0) {
+        <p>Det finns inga kurser att visa...</p>
+        }
+        @else {
+
+        <table>
+            <tr>
+                <th>Kurskod</th>
+                <th>Kursnamn</th>
+                <th>Ämne</th>
+                <th>Poäng</th>
+                <th>Kursplan</th>
+                <th>Lägg till</th>
+            </tr>
+            <!-- Loopa igenom -->
+            <tr *ngFor="let course of allCourses">
+                <td>{{ course.courseCode }}</td>
+                <td>{{ course.courseName }}</td>
+                <td>{{ course.subject }}</td>
+                <td>{{ course.points }}</td>
+                <td><a href="{{course.syllabus}}" target="_blank">Länk</a></td>
+                <td class="add">+</td>
+            </tr>
+        </table>
+        }
+    </div> <!-- Slut på table-wrapper -->
 </main>
