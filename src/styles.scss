@@ -42,10 +42,12 @@ $beige: #f7f6ec;
   box-sizing: border-box;
 }
 
+/* Len scrollning */
 html {
   scroll-behavior: smooth;
 }
 
+/* Body-regler */
 body {
   max-width: 2400px;
   margin: auto;
@@ -54,14 +56,22 @@ body {
   font-family: $bread;
 }
 
+/* Minimihöjd main */
+main {
+  min-height: 90vh;
+}
+
+/* Ta bort listpunkter */
 nav li {
   list-style: none;
 
+  /* Ta bort understrykning på länkar */
   a {
     text-decoration: none;
   }
 }
 
+/* Typsnitt för rubriker */
 h1,
 h2,
 h3,
@@ -69,11 +79,13 @@ a {
   font-family: $fancyfont;
 }
 
+/* Maxbredd på paragrafer */
 p {
   max-width: 40em;
   line-height: 1.5;
 }
 
+/* Bildbredder */
 img {
   width: 100%;
 }

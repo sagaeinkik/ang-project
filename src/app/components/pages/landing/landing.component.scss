@@ -123,3 +123,46 @@ article {
 }
 
 /* MEDIA QUERIES */
+@media (max-width: 850px) {
+  /* Gör mindre text på hero */
+  div.hero p.imgtext {
+    font-size: 1em;
+  }
+  /* Flytta linkbox */
+  .img-links .linkbox {
+    bottom: 0;
+  }
+  /* Bredda */
+  div.content-wrapper {
+    width: 85%;
+  }
+}
+
+@media (max-width: 590px) {
+  /* Mindre text på kurser/studenter */
+  .uni-info span {
+    font-size: 1.2em;
+  }
+  /* Bredda linkbox */
+  .img-links .linkbox {
+    width: 90%;
+    /* Mindre text på länkar */
+    a.btn-1 {
+      font-size: 0.8em;
+    }
+  }
+}
+
+@media (max-width: 490px) {
+  /* Scrollbar */
+  .img-links .linkbox {
+    top: 50%;
+    overflow-y: scroll;
+  }
+  /* En kolumn av grid */
+  .content-wrapper.grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+}

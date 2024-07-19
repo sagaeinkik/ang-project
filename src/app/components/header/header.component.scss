@@ -1,41 +1,50 @@
 @use "../../../styles.scss" as a;
 
 header {
+  /* Styla utseende */
   font-family: a.$fancyfont;
   font-size: 1.2em;
   width: 100%;
   background-color: a.$primary;
+  /* Gör flex */
   display: flex;
   justify-content: space-between;
 
+  /* Logga */
   img {
     width: 100%;
     max-width: 250px;
     filter: invert(1);
     margin-left: 1em;
   }
-
+  /* Flexa navigering */
   nav {
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-
+  /* Flexa ul-lista */
   nav ul {
     display: flex;
     width: 100%;
+    /* Sprid innehåll */
     justify-content: space-evenly;
 
+    /* Styla länkar */
     li a {
       @include a.transition;
       color: white;
       padding: 1.5em;
       cursor: pointer;
-
+      /* Hovereffekter */
       &:hover {
         background-color: a.$secondary;
       }
+    }
+    /* Nuvarande undersida */
+    li a.current {
+      background-color: a.$secondary;
     }
   }
 }
@@ -43,13 +52,14 @@ header {
 /* Media queries */
 @media (max-width: 620px) {
   header {
+    /* Gör om till kolumn */
     flex-direction: column;
     align-items: center;
 
     img {
       margin-left: 0;
     }
-
+    /* Bredda menyn */
     nav {
       width: 100%;
     }
@@ -57,7 +67,7 @@ header {
     nav ul {
       justify-content: space-between;
       padding: 1.5em;
-
+      /* Mindre länkar */
       li a {
         padding: 0.8em;
         font-size: 0.9em;
