@@ -68,10 +68,15 @@ div.breadcrumb-container {
       padding-bottom: 0.5em;
       padding-right: 0.6em;
       font-family: a.$fancyfont;
+      cursor: pointer;
     }
     //Specifikt lägg till-rubriken
     #cadd {
       text-align: center;
+    }
+    //Specifikt de oklickbara th-elementen
+    th.no-click {
+      cursor: default;
     }
     /* Sätt max-bredder */
     td {

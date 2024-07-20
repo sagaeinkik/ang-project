@@ -9,4 +9,5 @@ export interface Course {
   institutionCode: string;
   subject: string;
   syllabus: string;
+  added?: boolean;
 }

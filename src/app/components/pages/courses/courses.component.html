@@ -27,12 +27,12 @@
 
         <table>
             <tr>
-                <th>Kurskod</th>
-                <th>Kursnamn</th>
-                <th>Ämne</th>
-                <th class="left-margin">Poäng</th>
-                <th class="left-margin">Kursplan</th>
-                <th class="left-margin" id="cadd">Lägg till</th>
+                <th (click)="sortCourses('courseCode')">Kurskod</th>
+                <th (click)="sortCourses('courseName')">Kursnamn</th>
+                <th (click)="sortCourses('subject')">Ämne</th>
+                <th (click)="sortCourses('points')">Poäng</th>
+                <th class="no-click">Kursplan</th>
+                <th class="no-click" id="cadd">Lägg till</th>
             </tr>
             <!-- Loopa igenom -->
             <tr *ngFor="let course of allCourses">
@@ -41,7 +41,10 @@
                 <td>{{ course.subject }}</td>
                 <td>{{ course.points }}</td>
                 <td><a href="{{course.syllabus}}" target="_blank">Länk</a></td>
-                <td class="add">+</td>
+                <td class="add" (click)="addCourse(course)">
+                    <span *ngIf="!course.added">+</span>
+                    <span *ngIf="course.added">&check;</span>
+                </td>
             </tr>
         </table>
         }
