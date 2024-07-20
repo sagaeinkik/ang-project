@@ -1,0 +1,32 @@
+<main>
+    <div class="breadcrumb-container">
+        <a routerLink="/">Startsida</a> / <a routerLink="/ramschema" routerLinkActive="current">Ramschema</a>
+    </div> <!-- Slut på breadcrumb-container -->
+    <div class="table-wrapper">
+
+        @if (savedCourses.length < 1) { <p>Här var det tomt! Kika igenom <a routerLink="/courses">kurslistan</a> för att
+            lägga till kurser i ditt ramschema.</p>
+            }
+            @else {
+            <table>
+                <tr>
+                    <th>Kurskod</th>
+                    <th>Kursnamn</th>
+                    <th>Ämne</th>
+                    <th>Poäng</th>
+                    <th class="no-click">Kursplan</th>
+                    <th class="no-click" id="cremove">Ta bort</th>
+                </tr>
+                <!-- Loopa igenom -->
+                <tr *ngFor="let course of savedCourses">
+                    <td>{{ course.courseCode }}</td>
+                    <td>{{ course.courseName }}</td>
+                    <td>{{ course.subject }}</td>
+                    <td>{{ course.points }}</td>
+                    <td><a href="{{course.syllabus}}" target="_blank">Länk</a></td>
+                    <td class="remove">&times;</td>
+                </tr>
+            </table>
+            }
+    </div>
+</main>

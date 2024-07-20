@@ -1,39 +1,4 @@
-/*  Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Armata&family=Barlow+Semi+Condensed:ital,wght@0,400;0,600;0,700;1,400&display=swap");
-
-/* Variabler */
-$bread: "Barlow Semi Condensed", Arial, Helvetica, sans-serif;
-$fancyfont: Armata, Arial, Helvetica, sans-serif;
-
-$primary: #245953;
-$secondary: #329f93;
-$orange: #fb8d50;
-$beige: #f7f6ec;
-
-/* Mixins */
-@mixin transition {
-  transition: 0.6s ease;
-  -webkit-transition: 0.6s ease;
-  -moz-transition: 0.6s ease;
-}
-
-/* Mixin för att centrera saker  */
-@mixin center($horizontal, $vertical) {
-  @if $horizontal and $vertical {
-    position: relative;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  } @else if $vertical {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-  } @else if $horizontal {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
+@use "sass/assets" as a;
 
 /*  Allmänna regler */
 * {
@@ -52,8 +17,8 @@ body {
   max-width: 2400px;
   margin: auto;
   overflow-x: hidden;
-  background-color: $beige;
-  font-family: $bread;
+  background-color: a.$beige;
+  font-family: a.$bread;
 }
 
 /* Minimihöjd main */
@@ -76,7 +41,7 @@ h1,
 h2,
 h3,
 a {
-  font-family: $fancyfont;
+  font-family: a.$fancyfont;
 }
 
 /* Maxbredd på paragrafer */
@@ -92,20 +57,20 @@ img {
 
 /* Länkar som ska stylas som knappar */
 .btn-1 {
-  background-color: $primary;
+  background-color: a.$primary;
   color: white;
   text-decoration: none;
   padding: 0.8em 1.3em;
-  @include transition;
+  @include a.transition;
 
   span {
     margin-left: 0.4em;
     position: relative;
-    @include transition;
+    @include a.transition;
   }
 
   &:hover {
-    background-color: $secondary;
+    background-color: a.$secondary;
 
     span {
       font-size: 1.3em;
@@ -114,5 +79,84 @@ img {
   }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+//Breadcrumbs
+div.breadcrumb-container {
+  margin: 1em 0 1em 4em;
+  a {
+    font-size: 0.8em;
+    text-decoration: none;
+    color: a.$secondary;
+
+    &.current {
+      color: a.$primary;
+    }
+  }
+}
+
+/* Tabell */
+.table-wrapper {
+  /* Sätt bredd och scrollbarhet */
+  width: 95%;
+  margin: auto;
+  overflow-x: scroll;
+
+  table {
+    /* Möjliggör border */
+    border-collapse: collapse;
+    width: 100%;
+    /* Positionera rubriker */
+    th {
+      text-align: left;
+      padding-bottom: 0.5em;
+      padding-right: 0.6em;
+      font-family: a.$fancyfont;
+      cursor: pointer;
+    }
+    //Specifikt lägg till-rubriken
+    #cadd {
+      text-align: center;
+    }
+    //Specifikt de oklickbara th-elementen
+    th.no-click {
+      cursor: default;
+    }
+    /* Sätt max-bredder */
+    td {
+      max-width: 300px;
+      min-width: 50px;
+      border-bottom: 1px solid a.$secondary;
+      padding: 0.5em 0;
+      /* Styla kursplanlänkar */
+      a {
+        font-size: 0.9em;
+        color: a.$secondary;
+
+        &:hover {
+          color: a.$primary;
+        }
+      }
+    }
+    .add {
+      text-align: center;
+      color: a.$orange;
+      font-weight: bold;
+      font-size: 1.7em;
+      cursor: pointer;
+      @include a.transition;
+
+      &:hover {
+        font-size: 2.2em;
+      }
+    }
+    .remove {
+      @extend .add;
+      color: red;
+      text-align: left;
+    }
+  }
+}

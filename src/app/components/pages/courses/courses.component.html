@@ -20,33 +20,32 @@
     <!-- Tabell -->
     <div class="table-wrapper">
         <!-- Kontroll -->
-        @if (allCourses.length === 0) {
-        <p>Det finns inga kurser att visa...</p>
-        }
-        @else {
+        @if (allCourses.length < 1) { <p>Det finns inga kurser att visa...</p>
+            }
+            @else {
 
-        <table>
-            <tr>
-                <th (click)="sortCourses('courseCode')">Kurskod</th>
-                <th (click)="sortCourses('courseName')">Kursnamn</th>
-                <th (click)="sortCourses('subject')">Ämne</th>
-                <th (click)="sortCourses('points')">Poäng</th>
-                <th class="no-click">Kursplan</th>
-                <th class="no-click" id="cadd">Lägg till</th>
-            </tr>
-            <!-- Loopa igenom -->
-            <tr *ngFor="let course of allCourses">
-                <td>{{ course.courseCode }}</td>
-                <td>{{ course.courseName }}</td>
-                <td>{{ course.subject }}</td>
-                <td>{{ course.points }}</td>
-                <td><a href="{{course.syllabus}}" target="_blank">Länk</a></td>
-                <td class="add" (click)="addCourse(course)">
-                    <span *ngIf="!course.added">+</span>
-                    <span *ngIf="course.added">&check;</span>
-                </td>
-            </tr>
-        </table>
-        }
+            <table>
+                <tr>
+                    <th (click)="sortCourses('courseCode')">Kurskod</th>
+                    <th (click)="sortCourses('courseName')">Kursnamn</th>
+                    <th (click)="sortCourses('subject')">Ämne</th>
+                    <th (click)="sortCourses('points')">Poäng</th>
+                    <th class="no-click">Kursplan</th>
+                    <th class="no-click" id="cadd">Lägg till</th>
+                </tr>
+                <!-- Loopa igenom -->
+                <tr *ngFor="let course of allCourses">
+                    <td>{{ course.courseCode }}</td>
+                    <td>{{ course.courseName }}</td>
+                    <td>{{ course.subject }}</td>
+                    <td>{{ course.points }}</td>
+                    <td><a href="{{course.syllabus}}" target="_blank">Länk</a></td>
+                    <td class="add" (click)="addCourse(course)">
+                        <span *ngIf="!course.added">+</span>
+                        <span *ngIf="course.added">&check;</span>
+                    </td>
+                </tr>
+            </table>
+            }
     </div> <!-- Slut på table-wrapper -->
 </main>

@@ -1,18 +1,4 @@
-@use "../../../../styles.scss" as a;
-
-/* Breadcrumbs */
-div.breadcrumb-container {
-  margin: 1em 0 1em 4em;
-  a {
-    font-size: 0.8em;
-    text-decoration: none;
-    color: a.$secondary;
-
-    &.current {
-      color: a.$primary;
-    }
-  }
-}
+@use "../../../../sass/assets" as a;
 
 /* Filtrering */
 .filter-wrapper {
