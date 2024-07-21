@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { PageEvent, MatPaginatorModule } from '@angular/material/paginator';
 
 //Modeller och services
 import { Course } from '../../../../models/course';
@@ -12,7 +12,13 @@ import { LocalStorageService } from '../../../services/local-storage.service';
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, FormsModule],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    CommonModule,
+    FormsModule,
+    MatPaginatorModule,
+  ],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.scss',
 })
@@ -30,7 +36,12 @@ export class CoursesComponent {
   filteredBySubject: Course[] = []; //Kurser som matchar ämnet man valt i listan
   searchInput: string = ''; //Sökinput
   searchResults: Course[] = []; //Array för sökresultat
-  latestSort: null | string = null;
+  latestSort: null | string = null; //Lagra senaste sorteringen
+  paginatedCourses: Course[] = []; //Array för kurser som ska visas (paginerade)
+
+  // Info om paginering
+  currentPageIndex: number = 0;
+  currentPageSize: number = 50;
 
   ngOnInit() {
     /* Fetchanrop */
@@ -41,6 +52,12 @@ export class CoursesComponent {
       /* Lägg in unika ämnen i array */
       const subjects = this.allCourses.map((course) => course.subject);
       this.allSubjects = Array.from(new Set(subjects));
+
+      this.onPageChange({
+        pageIndex: 0,
+        pageSize: 20,
+        length: this.allCourses.length,
+      });
 
       this.updateCourseFromStorage();
     });
@@ -87,7 +104,7 @@ export class CoursesComponent {
   sortCourses(sortByX: keyof Course): void {
     let sortedCourses: Course[];
     //sortera arrayen
-    sortedCourses = this.resetList.sort((a, b) => {
+    sortedCourses = this.allCourses.sort((a, b) => {
       const aValue = a[sortByX];
       const bValue = b[sortByX];
 
@@ -112,6 +129,12 @@ export class CoursesComponent {
       //Om sortByX inte är likadan, nollställ så sorteringen börjar om
       this.latestSort = sortByX;
     }
+
+    this.onPageChange({
+      pageIndex: this.currentPageIndex,
+      pageSize: this.currentPageSize,
+      length: this.allCourses.length,
+    });
   }
 
   //Lägg till i ramschema
@@ -130,5 +153,21 @@ export class CoursesComponent {
     this.allCourses.forEach((course) => {
       course.added = this.localStorageService.courseStatus(course);
     });
+  }
+
+  //Funktion för paginering
+  onPageChange(event: PageEvent) {
+    // Uppdatera den aktuella sidinformationen
+    this.currentPageIndex = event.pageIndex;
+    this.currentPageSize = event.pageSize;
+
+    //Sätt startindex till sidoindex * hur många kurser som är på sidan
+    const startIndex = event.pageIndex * event.pageSize;
+    //Sätt slutindex till startindex plus sidstorlek
+    const endIndex = startIndex + event.pageSize;
+    //Kolla att kurser inte är tomma; gör brytpunkt med start/slutindex, lagra i paginatedCourses
+    if (this.allCourses && this.allCourses.length) {
+      this.paginatedCourses = this.allCourses.slice(startIndex, endIndex);
+    }
   }
 }

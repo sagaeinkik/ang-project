@@ -2,9 +2,11 @@
     <div class="breadcrumb-container">
         <a routerLink="/">Startsida</a> / <a routerLink="/ramschema" routerLinkActive="current">Ramschema</a>
     </div> <!-- Slut på breadcrumb-container -->
+    <h2>Mina kurser</h2>
     <div class="table-wrapper">
 
-        @if (savedCourses.length < 1) { <p>Här var det tomt! Kika igenom <a routerLink="/courses">kurslistan</a> för att
+        @if (savedCourses.length < 1) { <p class="empty">Här var det tomt! Kika igenom <a
+                routerLink="/courses">kurslistan</a> för att
             lägga till kurser i ditt ramschema.</p>
             }
             @else {
@@ -24,9 +26,10 @@
                     <td>{{ course.subject }}</td>
                     <td>{{ course.points }}</td>
                     <td><a href="{{course.syllabus}}" target="_blank">Länk</a></td>
-                    <td class="remove">&times;</td>
+                    <td class="remove" (click)="deleteCourse(course)">&times;</td>
                 </tr>
             </table>
+            <p class="totalpoints">Totala poäng: {{ totalPoints }}</p>
             }
     </div>
 </main>

@@ -14,12 +14,27 @@ import { CommonModule } from '@angular/common';
 export class RamschemaComponent {
   constructor(private localStorageService: LocalStorageService) {}
   savedCourses: Course[] = []; //array som ska visas i ramschemat
+  totalPoints: number = 0;
 
   ngOnInit() {
     //Använd service för att hämta kurser ur lagringen
     const fromStorage = this.localStorageService.getSavedCourses();
     if (fromStorage) {
       this.savedCourses = fromStorage;
+
+      //Nollställ poängen
+      this.totalPoints = 0;
+
+      //Loopa igenom
+      this.savedCourses.forEach((kurs) => {
+        this.totalPoints += kurs.points;
+      });
     }
+  }
+
+  deleteCourse(course: Course): void {
+    this.localStorageService.removeCourse(course);
+    //Uppdatera vy
+    this.ngOnInit();
   }
 }

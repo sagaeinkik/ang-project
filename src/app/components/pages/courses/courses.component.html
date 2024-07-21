@@ -19,8 +19,9 @@
     </div> <!-- Slut på div.filter-wrapper -->
     <!-- Tabell -->
     <div class="table-wrapper">
+        <!-- Paginering -->
         <!-- Kontroll -->
-        @if (allCourses.length < 1) { <p>Det finns inga kurser att visa...</p>
+        @if (paginatedCourses.length < 1) { <p>Det finns inga kurser att visa...</p>
             }
             @else {
 
@@ -34,7 +35,7 @@
                     <th class="no-click" id="cadd">Lägg till</th>
                 </tr>
                 <!-- Loopa igenom -->
-                <tr *ngFor="let course of allCourses">
+                <tr *ngFor="let course of paginatedCourses">
                     <td>{{ course.courseCode }}</td>
                     <td>{{ course.courseName }}</td>
                     <td>{{ course.subject }}</td>
@@ -46,6 +47,9 @@
                     </td>
                 </tr>
             </table>
+            <mat-paginator [length]="allCourses.length" [pageSize]="20" [pageSizeOptions]="[5, 10, 20, 50]"
+                (page)="onPageChange($event)">
+            </mat-paginator>
             }
     </div> <!-- Slut på table-wrapper -->
 </main>

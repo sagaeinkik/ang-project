@@ -37,62 +37,8 @@
   }
 }
 
-/* Tabell */
-.table-wrapper {
-  /* Sätt bredd och scrollbarhet */
-  width: 95%;
-  margin: auto;
-  overflow-x: scroll;
-
-  table {
-    /* Möjliggör border */
-    border-collapse: collapse;
-    width: 100%;
-    /* Positionera rubriker */
-    th {
-      text-align: left;
-      padding-bottom: 0.5em;
-      padding-right: 0.6em;
-      font-family: a.$fancyfont;
-      cursor: pointer;
-    }
-    //Specifikt lägg till-rubriken
-    #cadd {
-      text-align: center;
-    }
-    //Specifikt de oklickbara th-elementen
-    th.no-click {
-      cursor: default;
-    }
-    /* Sätt max-bredder */
-    td {
-      max-width: 300px;
-      min-width: 50px;
-      border-bottom: 1px solid a.$secondary;
-      padding: 0.5em 0;
-      /* Styla kursplanlänkar */
-      a {
-        font-size: 0.9em;
-        color: a.$secondary;
-
-        &:hover {
-          color: a.$primary;
-        }
-      }
-    }
-    td.add {
-      text-align: center;
-      color: a.$orange;
-      font-weight: bold;
-      font-size: 1.7em;
-      cursor: pointer;
-      @include a.transition;
-
-      &:hover {
-        font-size: 2.2em;
-      }
-    }
-  }
+mat-paginator {
+  background-color: a.$beige;
 }
 
 /* Media queries */

@@ -1,0 +1,26 @@
+@use "../../sass/assets" as a;
+
+h2 {
+  max-width: fit-content;
+  margin: 2em auto;
+}
+
+p.empty {
+  max-width: 35em;
+  margin: auto;
+
+  a {
+    text-decoration: none;
+    color: a.$primary;
+    font-size: 0.9em;
+
+    &:hover {
+      text-decoration: 1px dotted underline;
+      color: a.$secondary;
+    }
+  }
+}
+
+p.totalpoints {
+  margin-top: 1em;
+}
