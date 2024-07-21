@@ -8,6 +8,7 @@ import { PageEvent, MatPaginatorModule } from '@angular/material/paginator';
 import { Course } from '../../../../models/course';
 import { CourseService } from '../../../services/course.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -62,28 +63,22 @@ export class CoursesComponent {
       this.updateCourseFromStorage();
     });
   }
-  /* Funktion för att filtrera enligt ämne */
-  filterBySubject(): void {
-    /* Nollställ lista om tom */
-    if (this.specificSubject === 'alla') {
-      this.allCourses = this.resetList;
-    } else {
-      this.allCourses = this.resetList;
-      this.filteredBySubject = this.allCourses.filter((course) =>
-        course.subject.includes(this.specificSubject)
-      );
-      this.allCourses = this.filteredBySubject;
-    }
-  }
-  /* Funktion för att fritextsökning */
-  searchCourse(): void {
-    //Kolla så det sökts på något
-    if (this.searchInput.trim() !== '') {
-      //Nollställ ämne om man har valt det
-      this.specificSubject = '';
 
-      //Filtrera enligt kurskod/kursnamn i små bokstäver
-      this.searchResults = this.resetList.filter(
+  /* SÖK OCH FILTRERING */
+  searchCourse(): void {
+    this.applyFilters();
+  }
+  filterBySubject(): void {
+    this.applyFilters();
+  }
+  /* Funktion för att kombinera filtrering och sökning */
+  applyFilters(): void {
+    let filteredCourses = this.resetList;
+
+    // Filtrera enligt sökinput till lowercase
+    if (this.searchInput.trim() !== '') {
+      this.specificSubject = '';
+      filteredCourses = filteredCourses.filter(
         (course) =>
           course.courseCode
             .toLowerCase()
@@ -92,12 +87,26 @@ export class CoursesComponent {
             .toLowerCase()
             .includes(this.searchInput.toLowerCase())
       );
-      // Uppdatera allCourses med sökresultaten
-      this.allCourses = this.searchResults;
-    } else {
-      //Återställ resultat
-      this.allCourses = this.resetList;
     }
+
+    // Filtrera enligt valt ämne
+    if (this.specificSubject && this.specificSubject !== 'alla') {
+      this.searchInput = '';
+      filteredCourses = filteredCourses.filter(
+        (course) => course.subject === this.specificSubject
+      );
+    }
+
+    // Uppdatera paginerade kurser
+    this.allCourses = filteredCourses;
+    this.currentPageIndex = 0; //Nollställ denna först så att vyn kan uppdateras korrekt
+
+    //Uppdatera med paginering
+    this.onPageChange({
+      pageIndex: this.currentPageIndex,
+      pageSize: this.currentPageSize,
+      length: this.allCourses.length,
+    });
   }
 
   //Sortering
@@ -160,6 +169,12 @@ export class CoursesComponent {
     // Uppdatera den aktuella sidinformationen
     this.currentPageIndex = event.pageIndex;
     this.currentPageSize = event.pageSize;
+
+    //Uppdatera vyn om filtrering har gjort att inga kurser matchar
+    if (this.allCourses.length === 0) {
+      this.paginatedCourses = []; // Sätt till tom array
+      return;
+    }
 
     //Sätt startindex till sidoindex * hur många kurser som är på sidan
     const startIndex = event.pageIndex * event.pageSize;
