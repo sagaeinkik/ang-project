@@ -39,7 +39,7 @@
                     <td>{{ course.courseCode }}</td>
                     <td>{{ course.courseName }}</td>
                     <td>{{ course.subject }}</td>
-                    <td>{{ course.points }}</td>
+                    <td class="points">{{ course.points }}</td>
                     <td><a href="{{course.syllabus}}" target="_blank">Länk</a></td>
                     <td class="add" (click)="addCourse(course)">
                         <span *ngIf="!course.added">+</span>

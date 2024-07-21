@@ -130,7 +130,7 @@ div.breadcrumb-container {
       max-width: 300px;
       min-width: 50px;
       border-bottom: 1px solid a.$secondary;
-      padding: 0.5em 0;
+      padding: 0.5em 0.3em 0.5em 0;
       /* Styla kursplanlänkar */
       a {
         font-size: 0.9em;
@@ -158,5 +158,15 @@ div.breadcrumb-container {
       color: red;
       text-align: left;
     }
+  }
+}
+/* Media queries för tabell */
+@media (max-width: 600px) {
+  .table-wrapper table th {
+    font-size: 0.9em;
+    margin-right: 0.5em;
+  }
+  .table-wrapper table td.points {
+    text-align: center;
   }
 }
