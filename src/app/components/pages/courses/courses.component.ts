@@ -39,9 +39,9 @@ export class CoursesComponent {
   latestSort: null | string = null; //Lagra senaste sorteringen
   paginatedCourses: Course[] = []; //Array för kurser som ska visas (paginerade)
 
-  // Info om paginering
+  // Inställningar för paginering
   currentPageIndex: number = 0;
-  currentPageSize: number = 50;
+  currentPageSize: number = 20;
 
   ngOnInit() {
     /* Fetchanrop */
