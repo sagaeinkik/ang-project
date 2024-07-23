@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Course } from '../../models/course';
-import { LocalStorageService } from '../services/local-storage.service';
+import { Course } from '../../../../models/course';
+import { LocalStorageService } from '../../../services/local-storage.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
