@@ -8,7 +8,6 @@ import { PageEvent, MatPaginatorModule } from '@angular/material/paginator';
 import { Course } from '../../../../models/course';
 import { CourseService } from '../../../services/course.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
-import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -77,7 +76,6 @@ export class CoursesComponent {
 
     // Filtrera enligt sökinput till lowercase
     if (this.searchInput.trim() !== '') {
-      this.specificSubject = '';
       filteredCourses = filteredCourses.filter(
         (course) =>
           course.courseCode
@@ -91,7 +89,6 @@ export class CoursesComponent {
 
     // Filtrera enligt valt ämne
     if (this.specificSubject && this.specificSubject !== 'alla') {
-      this.searchInput = '';
       filteredCourses = filteredCourses.filter(
         (course) => course.subject === this.specificSubject
       );
